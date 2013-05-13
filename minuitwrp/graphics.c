@@ -687,12 +687,30 @@ gr_pixel *gr_fb_data(void)
 
 int gr_fb_blank(int blank)
 {
-    int ret;
-
-    ret = ioctl(gr_fb_fd, FBIOBLANK, blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
-    if (ret < 0)
-        perror("ioctl(): blank");
-	return ret;
+        int ret;
+        int fd;
+        
+        /* Blank/unblank generates weird artifacts, so just control the backlight instead */
+        /*ret = ioctl(gr_fb_fd, FBIOBLANK, blank ? FB_BLANK_POWERDOWN : FB_BLANK_UNBLANK);
+         if (ret < 0)
+         perror("ioctl(): blank");*/
+        
+        fd = open("/sys/class/leds/lcd-backlight/brightness", O_RDWR);
+        if (fd < 0) {
+                perror("cannot open LCD backlight");
+                return 1;
+        }
+        write(fd, blank ? "000": "200", 3);
+        close(fd);
+        fd = open("/sys/class/leds/button-backlight/brightness", O_RDWR);
+        if (fd < 0) {
+                perror("cannot open btn backlight");
+                return 2;
+        }
+        write(fd, blank ? "000": "200", 3);
+        close(fd);
+        
+        return 0;
 }
 
 int gr_get_surface(gr_surface* surface)
