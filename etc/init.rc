@@ -9,17 +9,18 @@ on init
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
     export EXTERNAL_STORAGE /sdcard
+    export EXTERNAL_ADD_STORAGE /external_sd
 
     symlink /system/etc /etc
 
-    mkdir /boot
-    mkdir /recovery
+    #mkdir /boot
+    #mkdir /recovery
     mkdir /sdcard
-    mkdir /internal_sd
+    #mkdir /internal_sd
     mkdir /external_sd
     mkdir /sd-ext
-    mkdir /datadata
-    mkdir /emmc
+    #mkdir /datadata
+    #mkdir /emmc
     mkdir /system
     mkdir /data
     mkdir /cache
