@@ -304,19 +304,16 @@ int TWFunc::tw_reboot(RebootCommand command)
 			Update_Log_File();
 			Update_Intent_File("s");
 			sync();
-			check_and_run_script("/sbin/rebootsystem.sh", "reboot system");
 			return reboot(RB_AUTOBOOT);
 		case rb_recovery:
-			check_and_run_script("/sbin/rebootrecovery.sh", "reboot recovery");
-			return __reboot(LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, (void*) "recovery");
+                        struct bootloader_message boot;
+                        memset(&boot, 0, sizeof(boot));
+                        strlcpy(boot.command, "boot-recovery", sizeof(boot.command));
+                        set_bootloader_message_block_name(&boot, PartitionManager.Find_Partition_By_Path("/misc")->Actual_Block_Device.c_str());
+			return reboot(RB_AUTOBOOT);
 		case rb_bootloader:
-			check_and_run_script("/sbin/rebootbootloader.sh", "reboot bootloader");
-			return __reboot(LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, (void*) "bootloader");
+			return __reboot(LINUX_REBOOT_MAGIC1, LINUX_REBOOT_MAGIC2, LINUX_REBOOT_CMD_RESTART2, (void*) "oem-unlock");
 		case rb_poweroff:
-			check_and_run_script("/sbin/poweroff.sh", "power off");
-#ifdef ANDROID_RB_POWEROFF
-			android_reboot(ANDROID_RB_POWEROFF, 0, 0);
-#endif
 			return reboot(RB_POWER_OFF);
 		case rb_download:
 			check_and_run_script("/sbin/rebootdownload.sh", "reboot download");
