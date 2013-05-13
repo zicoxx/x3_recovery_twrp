@@ -303,6 +303,8 @@ bool TWPartition::Process_Fstab_Line(string Line, bool Display_Error) {
 		}
 #ifdef TW_EXTERNAL_STORAGE_PATH
 		if (Mount_Point == EXPAND(TW_EXTERNAL_STORAGE_PATH)) {
+                        Display_Name = "External Storage";
+                        Storage_Name = Display_Name;
 			Is_Storage = true;
 			Storage_Path = EXPAND(TW_EXTERNAL_STORAGE_PATH);
 			Removable = true;
