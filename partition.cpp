@@ -288,13 +288,12 @@ bool TWPartition::Process_Fstab_Line(string Line, bool Display_Error) {
 			DataManager::SetValue(TW_HAS_DATADATA, 1);
 			Can_Be_Backed_Up = true;
 		} else if (Mount_Point == "/sd-ext") {
-			Wipe_During_Factory_Reset = true;
+			Wipe_During_Factory_Reset = false;
 			Display_Name = "SD-Ext";
-			Backup_Display_Name = Display_Name;
 			Storage_Name = Display_Name;
 			Wipe_Available_in_GUI = true;
 			Removable = true;
-			Can_Be_Backed_Up = true;
+			Can_Be_Backed_Up = false;
 		} else if (Mount_Point == "/boot") {
 			Display_Name = "Boot";
 			Backup_Display_Name = Display_Name;
@@ -308,7 +307,7 @@ bool TWPartition::Process_Fstab_Line(string Line, bool Display_Error) {
 			Is_Storage = true;
 			Storage_Path = EXPAND(TW_EXTERNAL_STORAGE_PATH);
 			Removable = true;
-			Wipe_Available_in_GUI = true;
+			Wipe_Available_in_GUI = false;
 #else
 		if (Mount_Point == "/sdcard" || Mount_Point == "/external_sd" || Mount_Point == "/external_sdcard") {
 			Is_Storage = true;
