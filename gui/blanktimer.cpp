@@ -57,6 +57,7 @@ bool blanktimer::IsScreenOff() {
 
 void blanktimer::setTime(int newtime) {
 	sleepTimer = newtime;
+        dimtime = sleepTimer / 3 - 1;
 }
 
 int blanktimer::setTimerThread(void) {
@@ -89,7 +90,7 @@ int  blanktimer::setClockTimer(void) {
 		usleep(1000000);
 		clock_gettime(CLOCK_MONOTONIC, &curTime);
 		diff = TWFunc::timespec_diff(btimer, curTime);
-		if (sleepTimer > 2 && diff.tv_sec > (sleepTimer - 2) && conblank == 0) {
+		if (sleepTimer > 14 && diff.tv_sec > dimtime && conblank == 0) {
 			orig_brightness = getBrightness();
 			setConBlank(1);
 			setBrightness(5);

@@ -49,6 +49,7 @@ class blanktimer {
 		unsigned long long sleepTimer;
 		int orig_brightness;
                 bool screenoff;
+                int dimtime;
 };
 
 extern blanktimer blankTimer;
