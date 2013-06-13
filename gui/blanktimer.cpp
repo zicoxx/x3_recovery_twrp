@@ -57,7 +57,7 @@ bool blanktimer::IsScreenOff() {
 
 void blanktimer::setTime(int newtime) {
 	sleepTimer = newtime;
-        dimtime = sleepTimer / 3 - 1;
+        dimtime = sleepTimer / 2 - 1;
 }
 
 int blanktimer::setTimerThread(void) {
