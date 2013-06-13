@@ -1121,7 +1121,7 @@
 			</object>
 
 			<object type="text" color="%text_color%">
-				<condition var1="tw_has_sdext_partition" var2="1" />
+				<condition var1="tw_has_sdext_partitionn" var2="1" />
 				<font resource="font" />
 				<placement x="%center_x%" y="%row4_text_y%" placement="5" />
 				<text>SD-EXT</text>
