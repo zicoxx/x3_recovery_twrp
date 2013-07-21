@@ -30,7 +30,7 @@ class blanktimer {
 		int setTimerThread(void);
 		void resetTimerAndUnblank(void);
 		void setTime(int newtime);
-                bool IsScreenOff();
+		bool IsScreenOff();
 
 	private:
 		void setConBlank(int blank);
@@ -48,8 +48,8 @@ class blanktimer {
 		timespec btimer;
 		unsigned long long sleepTimer;
 		int orig_brightness;
-                bool screenoff;
-                int dimtime;
+		bool screenoff;
+                int dimtime; 
 };
 
 extern blanktimer blankTimer;

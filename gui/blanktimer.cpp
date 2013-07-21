@@ -48,11 +48,11 @@ blanktimer::blanktimer(void) {
 	setTime(0);
 	setConBlank(0);
 	orig_brightness = getBrightness();
-        screenoff = false;
+	screenoff = false;
 }
 
 bool blanktimer::IsScreenOff() {
-        return screenoff;
+	return screenoff;
 }
 
 void blanktimer::setTime(int newtime) {
@@ -98,7 +98,7 @@ int  blanktimer::setClockTimer(void) {
 		if (sleepTimer && diff.tv_sec > sleepTimer && conblank < 2) {
 			setConBlank(2);
 			setBrightness(0);
-                        screenoff = true;
+			screenoff = true;
 			PageManager::ChangeOverlay("lock");
 		}
 #ifndef TW_NO_SCREEN_BLANK
@@ -125,7 +125,6 @@ int blanktimer::getBrightness(void) {
 			result = 255;
 		}
 	}
-        
 	return result;
 
 }
@@ -154,7 +153,7 @@ void blanktimer::resetTimerAndUnblank(void) {
 			// No break here, we want to keep going
 		case 2:
 			gui_forceRender();
-                        screenoff = false;
+			screenoff = false;
 			// No break here, we want to keep going
 		case 1:
 			setBrightness(orig_brightness);

@@ -892,9 +892,9 @@ int PageManager::Render(void)
 
 int PageManager::Update(void)
 {
-        if(blankTimer.IsScreenOff())
-                return 0;
-        
+    if(blankTimer.IsScreenOff())
+        return 0;
+
     return (mCurrentSet ? mCurrentSet->Update() : -1);
 }
 
